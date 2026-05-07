@@ -1,10 +1,4 @@
-
-// COMPONENTE — src/components/modals/AddPatientModal.tsx  (novo)
-// Formulário para adicionar um novo paciente.
-// Ao salvar, chama onSave() com o objeto do novo paciente.
-
-
-
+// src/components/modals/AddPatientModal.tsx
 
 import { useState } from "react";
 import {
@@ -12,42 +6,52 @@ import {
   Stethoscope, Activity, ClipboardList, Save,
 } from "lucide-react";
 import type { Patient } from "../../types/Patient";
+
 interface Props {
   onClose: () => void;
   onSave: (patient: Patient) => void;
 }
 
-// Campos do formulário (estado inicial vazio)
 const EMPTY_FORM = {
   name: "",
   age: "",
   phone: "",
   address: "",
   doctor: "",
-  conditions: "", // usuário digita separando por vírgula
+  conditions: "",
   notes: "",
+};
+
+// Estilo compartilhado dos inputs
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "10px 12px",
+  borderRadius: 10,
+  border: "1.5px solid #94a3b8",
+  fontSize: 13,
+  outline: "none",
+  boxSizing: "border-box",
+  fontFamily: "inherit",
+  background: "#f8fafc",
+  color: "#1e293b",
 };
 
 export default function AddPatientModal({ onClose, onSave }: Props) {
   const [form, setForm] = useState(EMPTY_FORM);
 
-  // Atualiza um campo específico do formulário
   const handleChange = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSave = () => {
     const newPatient: Patient = {
-      id: Date.now(), // ID temporário — substituir pelo ID da API em produção
+      id: Date.now(),
       name: form.name,
       age: parseInt(form.age) || 0,
       phone: form.phone,
       address: form.address,
       doctor: form.doctor,
-      conditions: form.conditions
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
+      conditions: form.conditions.split(",").map((s) => s.trim()).filter(Boolean),
       medications: [],
       nextDose: "—",
       status: "ok",
@@ -55,23 +59,20 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
       notes: form.notes,
       lastVisit: new Date().toLocaleDateString("pt-BR"),
     };
-
     onSave(newPatient);
     onClose();
   };
 
-  // Configuração dos campos de texto do formulário
   const TEXT_FIELDS = [
-    { key: "name",       label: "Nome Completo",                   Icon: User,        placeholder: "Ex: Maria Silva",       full: false },
-    { key: "age",        label: "Idade",                           Icon: Calendar,    placeholder: "Ex: 72",                full: false },
-    { key: "phone",      label: "Telefone",                        Icon: Phone,       placeholder: "(14) 99000-0000",       full: false },
-    { key: "address",    label: "Endereço",                        Icon: MapPin,      placeholder: "Rua, número",           full: false },
-    { key: "doctor",     label: "Médico Responsável",              Icon: Stethoscope, placeholder: "Dr. Nome",              full: false },
-    { key: "conditions", label: "Condições (separe por vírgula)",  Icon: Activity,    placeholder: "Diabetes, Pressão Alta", full: true },
+    { key: "name",       label: "Nome Completo",                    Icon: User,        placeholder: "Ex: Maria Silva",        full: false },
+    { key: "age",        label: "Idade",                            Icon: Calendar,    placeholder: "Ex: 72",                 full: false },
+    { key: "phone",      label: "Telefone",                         Icon: Phone,       placeholder: "(14) 99000-0000",        full: false },
+    { key: "address",    label: "Endereço",                         Icon: MapPin,      placeholder: "Rua, número",            full: false },
+    { key: "doctor",     label: "Médico Responsável",               Icon: Stethoscope, placeholder: "Dr. Nome",               full: false },
+    { key: "conditions", label: "Condições (separe por vírgula)",   Icon: Activity,    placeholder: "Diabetes, Pressão Alta", full: true  },
   ];
 
   return (
-    // Overlay
     <div
       onClick={onClose}
       style={{
@@ -100,7 +101,7 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
         {/* Cabeçalho */}
         <div
           style={{
-            background: "linear-gradient(135deg, #1d4ed8, #3b82f6)",
+            background: "linear-gradient(135deg, #0b0b0b, #3b82f6)",
             borderRadius: "20px 20px 0 0",
             padding: "22px 28px",
             display: "flex",
@@ -133,23 +134,13 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
 
         {/* Formulário */}
         <div style={{ padding: 28 }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 14,
-              marginBottom: 14,
-            }}
-          >
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
             {TEXT_FIELDS.map(({ key, label, Icon, placeholder, full }) => (
-              <div
-                key={key}
-                style={{ gridColumn: full ? "1 / -1" : undefined }}
-              >
+              <div key={key} style={{ gridColumn: full ? "1 / -1" : undefined }}>
                 <label
                   style={{
                     fontSize: 12,
-                    color: "#64748b",
+                    color: "#475569",
                     fontWeight: 600,
                     display: "flex",
                     alignItems: "center",
@@ -164,27 +155,18 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
                   value={form[key as keyof typeof EMPTY_FORM]}
                   onChange={(e) => handleChange(key, e.target.value)}
                   placeholder={placeholder}
-                  style={{
-                    width: "100%",
-                    padding: "10px 12px",
-                    borderRadius: 10,
-                    border: "1.5px solid #e2e8f0",
-                    fontSize: 13,
-                    outline: "none",
-                    boxSizing: "border-box",
-                    fontFamily: "inherit",
-                  }}
+                  style={inputStyle}
                 />
               </div>
             ))}
           </div>
 
-          {/* Observações (textarea separado) */}
+          {/* Observações */}
           <div style={{ marginBottom: 20 }}>
             <label
               style={{
                 fontSize: 12,
-                color: "#64748b",
+                color: "#475569",
                 fontWeight: 600,
                 display: "flex",
                 alignItems: "center",
@@ -200,21 +182,11 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
               onChange={(e) => handleChange("notes", e.target.value)}
               placeholder="Notas sobre o paciente..."
               rows={3}
-              style={{
-                width: "100%",
-                padding: "10px 12px",
-                borderRadius: 10,
-                border: "1.5px solid #e2e8f0",
-                fontSize: 13,
-                resize: "none",
-                outline: "none",
-                boxSizing: "border-box",
-                fontFamily: "inherit",
-              }}
+              style={{ ...inputStyle, resize: "none" }}
             />
           </div>
 
-          {/* Botões de ação */}
+          {/* Botões */}
           <div style={{ display: "flex", gap: 10 }}>
             <button
               onClick={onClose}
@@ -222,7 +194,7 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
                 flex: 1,
                 padding: 12,
                 borderRadius: 12,
-                border: "1.5px solid #e2e8f0",
+                border: "1.5px solid #cbd5e1",
                 background: "#fff",
                 cursor: "pointer",
                 fontSize: 14,
@@ -232,7 +204,6 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
             >
               Cancelar
             </button>
-
             <button
               onClick={handleSave}
               style={{
@@ -240,7 +211,7 @@ export default function AddPatientModal({ onClose, onSave }: Props) {
                 padding: 12,
                 borderRadius: 12,
                 border: "none",
-                background: "linear-gradient(135deg, #1d4ed8, #3b82f6)",
+                background: "linear-gradient(135deg, #0e0e0f, #3b82f6)",
                 cursor: "pointer",
                 fontSize: 14,
                 fontWeight: 700,

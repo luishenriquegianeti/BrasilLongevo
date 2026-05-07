@@ -7,7 +7,7 @@
 
 import { Pill, Clock, Eye, Edit3, Trash2, Plus } from "lucide-react";
 import type { Patient } from "../types/Patient";
-import StatusBadge from "./Statusbadge";
+import StatusBadge from "./Status";
 
 interface Props {
   patients: Patient[];                    // lista já filtrada pela busca
@@ -61,7 +61,7 @@ export default function TabelaPacientes({
             padding: "10px 18px",
             border: "none",
             borderRadius: 12,
-            background: "linear-gradient(135deg, #1d4ed8, #3b82f6)",
+            background: "linear-gradient(135deg, #000000, #3b82f6)",
             color: "#ffffff",
             fontWeight: 700,
             fontSize: 13,
@@ -129,8 +129,7 @@ export default function TabelaPacientes({
   );
 }
 
-// ── Sub-componente: linha individual da tabela ──────────────
-// Separado aqui para não deixar o JSX da tabela gigante.
+// Sub-componente: linha individual da tabela
 interface RowProps {
   patient: Patient;
   isEven: boolean;
@@ -168,12 +167,12 @@ function PatientRow({ patient, isEven, onView, onEdit, onDelete }: RowProps) {
             width: 38,
             height: 38,
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #bfdbfe, #93c5fd)",
+            background: "linear-gradient(135deg, #3b3b3b, #479bfc)",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "center", 
             fontWeight: 700,
-            color: "#1d4ed8",
+            color: "#0e0e0f",
             fontSize: 14,
             flexShrink: 0,
           }}
@@ -195,7 +194,7 @@ function PatientRow({ patient, isEven, onView, onEdit, onDelete }: RowProps) {
             key={condition}
             style={{
               fontSize: 12,
-              color: "#508adb",
+              color: "#383737",
               display: "flex",
               alignItems: "center",
               gap: 4,
@@ -247,23 +246,6 @@ function PatientRow({ patient, isEven, onView, onEdit, onDelete }: RowProps) {
         >
           <Eye size={12} />
           Ver
-        </button>
-
-        {/* Editar */}
-        <button
-          onClick={() => onEdit(patient)}
-          style={{
-            padding: "7px 9px",
-            borderRadius: 8,
-            border: "1.5px solid #e2e8f0",
-            background: "#fff",
-            color: "#64748b",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Edit3 size={12} />
         </button>
 
         {/* Excluir */}

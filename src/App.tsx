@@ -9,14 +9,15 @@
 
 import { useState, useEffect } from "react";
 import type { Patient } from "./types/Patient";
-import { PATIENTS_DATA } from "./datas/Patients";
+import { PATIENTS_DATA } from "./data/Patients";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import Cards from "./components/Cards";
 import TabelaPacientes from "./components/TabelaPacientes";
 import PatientModal from "./components/modals/PatientModal";
-import AddPatientModal from "./components/modals/Addpatientmodal";
-import NotificationPanel from "./components/Notificationpanel";
+import AddPatientModal from "./components/modals/TelPacient";
+import NotificationPanel from "./components/TelNotification";
+import Medicamento from"./components/TelMedicamento";
 
 export default function App() {
   const [patients, setPatients] = useState<Patient[]>(PATIENTS_DATA);
@@ -73,7 +74,7 @@ export default function App() {
   return (
     <div
       style={{
-        display: "flex",
+        display: "flex",  
         height: "100vh",
         background: "#f1f5f9",
         fontFamily: "'DM Sans', sans-serif",
@@ -107,15 +108,17 @@ export default function App() {
         />
 
         {/* Conteúdo com scroll */}
-        <div style={{ flex: 1, overflowY: "auto", padding: 28 }}>
+        <div style={{ flex: 1, overflowY: "auto", }}>
 
-          {/* Cards de resumo */}
-          <Cards
-            total={stats.total}
-            onTime={stats.onTime}
-            late={stats.late}
-            urgent={stats.urgent}
-          />
+          {/*Pagina pacientes */}
+          {activeNav === "Pacientes" && (
+            <>
+            <Cards
+              total={stats.total}
+              onTime={stats.onTime}
+              late={stats.late}
+              urgent={stats.urgent}
+            />
 
           {/* Tabela de pacientes */}
           <TabelaPacientes
@@ -124,7 +127,13 @@ export default function App() {
             onEdit={setSelectedPatient}   // por enquanto abre o modal de detalhes
             onDelete={handleDeletePatient}
             onAdd={() => setShowAddModal(true)}
-          />
+            />
+          </>
+        )}
+          {/*Página: Medicamentos */}
+          {activeNav === "Medicamentos" && (
+           <Medicamento />
+  )}
         </div>
       </main>
 
@@ -155,6 +164,7 @@ export default function App() {
             setShowNotifications(false);
           }}
         />
+        
       )}
     </div>
   );

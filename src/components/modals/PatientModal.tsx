@@ -10,7 +10,7 @@ import {
   Activity, Pill, CheckCircle, FileText,
 } from "lucide-react";
 import type { Patient } from "../../types/Patient";
-import StatusBadge from "../Statusbadge";
+import StatusBadge from "../Status";
 
 interface Props {
   patient: Patient | null;

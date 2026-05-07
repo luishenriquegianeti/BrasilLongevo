@@ -1,8 +1,8 @@
-// ============================================================
+
 // COMPONENTE — src/components/Sidebar.tsx  (arquivo já existia)
 // Barra lateral com logo, links de navegação e botão "+ Novo Paciente".
 // Recebe qual aba está ativa e uma função para abrir o modal de adição.
-// ============================================================
+
 
 import { Users, Pill, Stethoscope, FileText, Settings, Plus, Heart } from "lucide-react";
 
@@ -95,30 +95,6 @@ export default function Sidebar({ activeNav, onNavChange, onAddPatient }: Props)
           );
         })}
       </nav>
-
-      {/* Botão "+ Novo Paciente" no rodapé da sidebar */}
-      <div style={{ padding: "16px 12px", borderTop: "1px solid #f1f5f9" }}>
-        <button
-          onClick={onAddPatient}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            width: "100%",
-            padding: "11px 14px",
-            borderRadius: 12,
-            border: "none",
-            background: "linear-gradient(135deg, #000000, #3b82f6)",
-            color: "#fff",
-            fontWeight: 700,
-            fontSize: 13,
-            cursor: "pointer",
-          }}
-        >
-          <Plus size={15} />
-          Novo Paciente
-        </button>
-      </div>
-    </aside>
+      </aside>
   );
 }

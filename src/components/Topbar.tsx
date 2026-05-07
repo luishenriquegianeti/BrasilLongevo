@@ -51,10 +51,12 @@ export default function Topbar({
           style={{
             width: "100%",
             padding: "10px 12px 10px 36px",
-            border: "1.5px solid #ffffff",
+            border: "1.5px solid #b6babe",
             borderRadius: 12,
             fontSize: 13,
-            outline: "none",
+            outline: "none",  
+            background: "#f9f7f7",
+            color:"#000000",
             boxSizing: "border-box",
             fontFamily: "inherit",
           }}
