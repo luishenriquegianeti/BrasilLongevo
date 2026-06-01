@@ -134,6 +134,8 @@ yarn install
 # Execute o servidor
 yarn start
 ---
+```
+Acesse: [http://localhost:3000/controle]
 
 ## 🚀 Melhorias Futuras
 
