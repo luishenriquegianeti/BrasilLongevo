@@ -42,7 +42,7 @@ export default function MedicamentoModal({ item, onClose, onSave }: Props) {
 
     setSaving(true);
     try {
-      // POST → /api/  |  PUT → /api/:id   (rotas que já existem no backend)
+    
       const url    = isEdit ? `/api/${item!.id}` : "/api/";
       const method = isEdit ? "PUT" : "POST";
 
@@ -113,7 +113,7 @@ export default function MedicamentoModal({ item, onClose, onSave }: Props) {
               />
             </div>
             <div>
-              <label style={labelStyle}>Descrição</label>
+              <label style={labelStyle}>Descrição </label>
               <input
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}

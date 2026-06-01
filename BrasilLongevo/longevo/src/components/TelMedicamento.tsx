@@ -123,7 +123,7 @@ export default function MedicamentosPage() {
 
         {/* Colunas */}
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1.2fr 1.4fr 1fr 1fr auto", padding: "12px 24px", gap: 12 }}>
-          {["Medicamento", "Categoria", "Apresentação", "Estoque", "Status", "Ações"].map((h) => (
+          {["Medicamento", "Categoria", "apresentação", "Estoque", "Status", "Ações"].map((h) => (
             <div key={h} style={{ fontSize: 11, color: "#94a3b8", fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.6 }}>{h}</div>
           ))}
         </div>
@@ -133,7 +133,7 @@ export default function MedicamentosPage() {
           Carregando medicamentos...
           </div>}
         {/* Estado: erro */}
-        {error && !loading && <div style={{ textAlign: "center", padding: "40px 0", color: "#ef4444", fontSize: 14 }}>
+        {error && !loading && <div style={{ textAlign: "center", padding: "40px 0", color: "#8d8585", fontSize: 14 }}>
           {error}
           </div>}
 
