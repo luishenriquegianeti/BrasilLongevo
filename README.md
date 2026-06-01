@@ -111,7 +111,7 @@ npm run dev
 
 Acesse: [http://localhost:5173](http://localhost:5173)
 
-### Backend
+### ativar o banco de dados Backend
 
 ```bash
 # Acesse a pasta da api
@@ -123,7 +123,16 @@ yarn install
 # Execute o servidor
 yarn start
 ```
+### Frontend e Backend
+```bash
+# Acesse a pasta da frontend
+cd Brasil-Longevo/frontend
 
+# Instale as dependências
+yarn install
+
+# Execute o servidor
+yarn start
 ---
 
 ## 🚀 Melhorias Futuras
