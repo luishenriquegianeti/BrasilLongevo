@@ -152,7 +152,8 @@ Acesse: [http://localhost:3000/controle]
 - Gabriel Evangelista Demarchi
 - Gustavo Henrique Ferreira dos Santos
 - Vinicius Pedroso Garcias
-
+- Samuel Benkard Moreira
+  
 ---
 
 ## 🏫 Instituição
